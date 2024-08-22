@@ -1,26 +1,35 @@
-x = int(input("Put the number you want to discover if it is prime: "))
-cont = 2
-a = "That is not a prime number!"
-r = x % cont
+import math
 
+def verify_prime(x: int) -> bool:
+    """
+    Verifies if a given number is a prime number.
+    
+    Parameters:
+    x (int): The number to check for primality.
 
-if x == 2:
-    print("YOU FIND A PRIME NUMBER!!!")
-elif r == 0 or x == 1:
-    print(a)
-else:
+    Returns:
+    bool: True if the number is prime, False otherwise.
+    """
+    
+    if x < 2:
+        print("That is not a prime number!")
+        return False
+    elif x == 2:
+        print("Prime found!")
+        return True
+
+    if x % 2 == 0:
+        print("That is not a prime number!")
+        return False
+
+    sqrt_x = math.isqrt(x)
     cont = 3
-    while True:
-        r = x % cont
 
-        if r != 0 and cont <= (x/2):
-            print(f'The remainder of {x} divided by {cont} is {r}')
-        elif r == 0 and cont <= (x/2):
-            print(a)
-            print(f'Because the remainder of {x} divided by {cont} is {r}')
-            break
-        else:
-            print("YOU FIND A PRIME NUMBER!!!")
-            break
-
+    while cont <= sqrt_x:
+        if x % cont == 0:
+            print(f"That is not a prime number, remainder of {x} divided by {cont} is 0")
+            return False
         cont += 2
+
+    print("Prime found!")
+    return True
